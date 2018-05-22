@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>jquery.SuperCookie</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta name="author" content="Tantau Horia" />
+    <meta name="copyright" content="Tantau Horia" />
+    <meta name="robots" content="all, index, follow" /> 
+    <meta name="description" content="A simple, jQuery plugin for reading, writing and deleting JSON values in cookies." /> 
+    
+    <script type="text/javascript" src="../lib/jquery-min.1.8.2.js"></script>
+    <script type="text/javascript" src="../lib/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../lib/json3.min.js"></script>
+    <script type="text/javascript" src="../jquery.SuperCookie.min.js"></script>
+</head>
+
+<body>
+    <h1><a href='https://github.com/tantau-horia/jquery-SuperCookie'>jquery.SuperCookie</a></h1>
+    <p>Tested with:</p>
+    <ul>
+        <li>Firefox 16.0.1 <a href='http://www.mozilla.org/en-US/firefox/fx/#desktop' target='_blank'>[link]</a></li>
+        <li>Firebug 1.10.4 <a href='https://addons.mozilla.org/en-us/firefox/addon/firebug/' target='_blank'>[link]</a></li>
+        <li>Cookies Manager+ 1.5.1.1  <a href='https://addons.mozilla.org/en-US/firefox/addon/cookies-manager-plus/' target='_blank'>[link]</a></li>
+    </ul>
+    <p>Check Firebug Console for more info...</p><br />
+    <p>Demo screen:</p>
+    <img src='screen.png' alt='jquery.SuperCookie'/>
+
+    <script type='text/javascript'>
+    $(document).ready(function () {
+        
+        console.log("1. Create cookie: cookie name: 'name_of_the_cookie'; cookie values: {name_field_1:\"value1\",name_field_2:\"value2\"}");
+        $.super_cookie({expires: 7,path: "/"}).create("name_of_the_cookie",{name_field_1:"value1",name_field_2:"value2"});
+    
+        console.log("2. Check if cookie exists.");
+        console.log($.super_cookie().check("name_of_the_cookie"));
+    
+        console.log("3. Check if cookie value is a valid JSON.");
+        console.log($.super_cookie().verify("name_of_the_cookie"));
+        
+        console.log("4. Read cookie values as string.");
+        console.log($.super_cookie().read_values("name_of_the_cookie"));
+        
+        console.log("5. Read cookie values as JSON object.");
+        console.log($.super_cookie().read_JSON("name_of_the_cookie"));
+        
+        console.log("6. Read a single value from the stored JSON: index: \"name_field_1\"");
+        console.log($.super_cookie().read_value("name_of_the_cookie","name_field_1"));
+        
+        console.log("7. Replace a value from the stored JSON: index: \"name_field_1\", value: \"new_value\"");
+        $.super_cookie().replace_value("name_of_the_cookie","name_field_1","new_value");
+        console.log($.super_cookie().read_JSON("name_of_the_cookie"));
+        
+        console.log("8. Add a value to the stored JSON: index: \"name_field_3\", value: \"value3\"");
+        $.super_cookie().add_value("name_of_the_cookie","name_field_3","value3");
+        console.log($.super_cookie().read_JSON("name_of_the_cookie"));
+        
+        console.log("9. Remove a value from the stored JSON: index: \"name_field_1\"");
+        $.super_cookie().remove_value("name_of_the_cookie","name_field_1");
+        console.log($.super_cookie().read_JSON("name_of_the_cookie"));
+    });
+    </script>
+
+</body>
+</html>
